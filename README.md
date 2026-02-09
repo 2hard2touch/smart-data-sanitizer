@@ -8,6 +8,15 @@ Use the streamlit cloud demo at https://smart-data-sanitizer.streamlit.app/
 
 The Smart Data Sanitizer helps sanitize production data for testing, development, or sharing purposes without compromising data utility or consistency. It detects common PII types (emails, phone numbers, names, credit card numbers) and replaces them with realistic fake data while ensuring that identical values are consistently replaced throughout the dataset.
 
+### Goals
+
+- **Privacy Protection**: Remove sensitive personal information from datasets to comply with privacy regulations
+- **Data Utility**: Maintain data structure, relationships, and format so sanitized data remains useful for testing
+- **Consistency**: Ensure referential integrity by mapping identical inputs to identical outputs
+- **Simplicity**: Provide a straightforward tool that requires no configuration or API keys
+- **Extensibility**: Support future enhancements like LLM-based detection without architectural changes
+
+
 ## Demo Video
 
 Watch a 2-minute demo of the Smart Data Sanitizer in action:
@@ -18,15 +27,6 @@ The demo shows:
 - CLI usage with sample data
 - Streamlit web interface walkthrough
 - Consistency and referential integrity in action
-
-### Goals
-
-- **Privacy Protection**: Remove sensitive personal information from datasets to comply with privacy regulations
-- **Data Utility**: Maintain data structure, relationships, and format so sanitized data remains useful for testing
-- **Consistency**: Ensure referential integrity by mapping identical inputs to identical outputs
-- **Simplicity**: Provide a straightforward tool that requires no configuration or API keys
-- **Extensibility**: Support future enhancements like LLM-based detection without architectural changes
-
 
 ## Installation
 
