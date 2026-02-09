@@ -81,6 +81,18 @@ The application will open in your default web browser at `http://localhost:8501`
 - Clear error messages and validation
 - Perfect for one-off sanitization tasks
 
+**Deploying to Streamlit Cloud:**
+
+To deploy this application to Streamlit Cloud:
+
+1. Push your code to a GitHub repository
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
+3. Click "New app" and select your repository
+4. Set the main file path to: `src/data_sanitizer/streamlit_app.py`
+5. Click "Deploy"
+
+**Important:** The project includes a `runtime.txt` file that pins Python to version 3.11, which is required for compatibility with the `presidio` library dependencies. Streamlit Cloud will automatically use this Python version.
+
 ### Command Format
 
 **CLI Usage:**
@@ -156,6 +168,7 @@ The project includes sample datasets you can use to test the sanitizer:
   }
 ]
 ```
+
 **Output** (`clean_data.json`):
 ```json
 [
@@ -181,47 +194,6 @@ Summary:
 Sanitized data written to: clean_data.json
 ```
 
-### Advanced Example with Nested Data
-
-**Input**:
-```json
-[
-  {
-    "user_id": 42,
-    "first_name": "Jane",
-    "last_name": "Smith",
-    "contact": {
-      "email": "jane.smith@company.com",
-      "phone": "(555) 987-6543"
-    },
-    "payment": {
-      "card": "4532-1234-5678-9010",
-      "billing_name": "Jane Smith"
-    },
-    "notes": "Contact Jane Smith at jane.smith@company.com for urgent matters."
-  }
-]
-```
-
-**Output**:
-```json
-[
-  {
-    "user_id": 42,
-    "first_name": "Sarah",
-    "last_name": "Martinez",
-    "contact": {
-      "email": "sarah.martinez@company.org",
-      "phone": "(555) 345-6789"
-    },
-    "payment": {
-      "card": "4532-9876-5432-1098",
-      "billing_name": "Sarah Martinez"
-    },
-    "notes": "Contact Sarah Martinez at sarah.martinez@company.org for urgent matters."
-  }
-]
-```
 
 **Key Features Demonstrated**:
 - **Referential Integrity**: "Jane Smith" and "jane.smith@company.com" are consistently replaced throughout
@@ -240,52 +212,7 @@ The sanitizer follows a modular, plugin-based architecture:
 - **Replacer**: Generates consistent fake data using Faker library
 - **Consistency Cache**: Maintains mapping between original and fake values
 
-### Architectural Decisions
-
-**Why Presidio + Regex for Detection?**
-
-We use a hybrid approach combining regex patterns and Microsoft's Presidio library:
-- **Regex patterns** provide fast, deterministic detection for structured data (emails, phone numbers, credit card numbers)
-- **Presidio** offers robust, pre-trained entity recognition for names without requiring API keys or external services
-- This combination provides excellent coverage for common PII types while maintaining performance and reliability
-
-**Why Faker for Generation?**
-
-Faker is the industry-standard library for generating realistic fake data:
-- Supports all required PII types (names, emails, phone numbers, credit card numbers)
-- Generates semantically valid data that passes format validation (e.g., Luhn algorithm for credit cards)
-- Deterministic when seeded, enabling reproducible tests and consistent behavior
-- Well-maintained with extensive documentation and community support
-
-**Why Plugin Architecture?**
-
-The detector system uses a plugin-based design for extensibility:
-- Each detector is independent and can be developed/tested in isolation
-- New detection strategies (including future LLM integration) can be added without modifying core logic
-- Detectors can be easily enabled/disabled via configuration
-- Supports different detection approaches (regex, ML models, API-based) through a common interface
-
-**Why In-Memory Consistency Cache?**
-
-The MVP uses a simple dictionary-based cache for maintaining referential integrity:
-- Sufficient for typical datasets that fit in memory
-- Provides O(1) lookup performance for consistency checks
-- Simple implementation reduces complexity and potential bugs
-- Can be extended to persistent storage (Redis, database) if needed for larger datasets in future versions
-
 ## Development
-
-### Running the Tool
-
-**Windows:**
-```cmd
-.venv\Scripts\python.exe -m data_sanitizer.cli input.json output.json
-```
-
-**Unix/macOS:**
-```bash
-.venv/bin/python -m data_sanitizer.cli input.json output.json
-```
 
 ### Code Quality
 
@@ -317,29 +244,6 @@ The project includes comprehensive testing with a dual approach:
 
 **Total: 251 tests with 95% code coverage**
 
-### Test Categories
-
-**Unit Tests** (`tests/unit/`):
-- Detector tests: Email, phone, name, and credit card detection with various formats
-- Replacer tests: Fake data generation, consistency, and format preservation
-- Sanitizer tests: File I/O, JSON parsing, structure preservation
-- CLI tests: Argument parsing, error handling, exit codes
-- Streamlit tests: Web interface components and workflows
-- Model tests: Data structures and validation
-
-**Property-Based Tests** (`tests/property/`):
-- Consistency properties: Same input → same output across all PII types
-- Validity properties: Generated data matches expected formats
-- Preservation properties: Structure, format, and case preservation
-- Detection properties: Field-name-agnostic PII detection
-- CLI properties: Exit codes, error handling, summary display
-
-**Integration Tests** (`tests/integration/`):
-- Full sanitization workflows with sample datasets
-- Edge cases: Empty data, nested structures, mixed PII
-- Error handling: File not found, invalid JSON, permission errors
-- Consistency across multiple runs with same seed
-- Output validation and re-sanitization
 
 ### Running Tests
 
@@ -349,34 +253,12 @@ Run the complete test suite:
 ```cmd
 # Run all tests (251 tests, ~2.5 minutes)
 .venv\Scripts\python.exe -m pytest
-
-# Run with coverage report
-.venv\Scripts\python.exe -m pytest --cov=src/data_sanitizer --cov-report=html
-
-# Run specific test categories
-.venv\Scripts\python.exe -m pytest tests/unit/          # Unit tests
-.venv\Scripts\python.exe -m pytest tests/property/      # Property-based tests
-.venv\Scripts\python.exe -m pytest tests/integration/   # Integration tests
-
-# Run with verbose output
-.venv\Scripts\python.exe -m pytest -v
 ```
 
 **Unix/macOS:**
 ```bash
 # Run all tests
 .venv/bin/python -m pytest
-
-# Run with coverage report
-.venv/bin/python -m pytest --cov=src/data_sanitizer --cov-report=html
-
-# Run specific test categories
-.venv/bin/python -m pytest tests/unit/
-.venv/bin/python -m pytest tests/property/
-.venv/bin/python -m pytest tests/integration/
-
-# Run with verbose output
-.venv/bin/python -m pytest -v
 ```
 
 ### Test Coverage
@@ -395,46 +277,6 @@ The test suite achieves **95% code coverage** across all modules:
 | credit_card_detector.py | 94% |
 | sanitizer.py | 88% |
 | base.py | 83% |
-
-**View detailed coverage report:**
-```cmd
-# Windows
-.venv\Scripts\python.exe -m pytest --cov=src/data_sanitizer --cov-report=html
-start htmlcov\index.html
-
-# Unix/macOS
-.venv/bin/python -m pytest --cov=src/data_sanitizer --cov-report=html
-open htmlcov/index.html
-```
-
-### Property-Based Testing
-
-The project uses Hypothesis for property-based testing, which validates correctness properties across randomly generated inputs:
-
-**21 Correctness Properties Validated:**
-1. JSON Round-Trip Validity
-2. Invalid JSON Error Handling
-3. Structure and Non-PII Preservation
-4. Field-Name-Agnostic PII Detection
-5. Email Replacement Validity
-6. Email Consistency
-7. Phone Replacement Validity
-8. Phone Consistency
-9. Phone Format Preservation
-10. Name Type Preservation
-11. Name Consistency
-12. Name Case Preservation
-13. Cross-Field Name Consistency
-14. Credit Card Replacement Validity
-15. Credit Card Consistency
-16. Replacement Uniqueness
-17. CLI Missing Arguments Error
-18. CLI Exit Code Correctness
-19. CLI Summary Display
-20. JSON Parse Error Details
-21. Detector Configuration
-
-Each property test runs 100+ iterations with randomly generated data to ensure correctness across a wide input space.
 
 ### Sample Test Data
 

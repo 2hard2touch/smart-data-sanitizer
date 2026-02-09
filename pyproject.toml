@@ -39,7 +39,8 @@ addopts = "-v --strict-markers"
 
 [tool.hypothesis]
 # Set higher deadline to accommodate NameDetector initialization (Presidio NLP model loading)
-deadline = 1000  # milliseconds
+# Increased to 2000ms for CI/CD environments which can be slower than local machines
+deadline = 2000  # milliseconds
 
 [tool.ruff]
 line-length = 100

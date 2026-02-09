@@ -71,8 +71,8 @@ class TestCLIExitCodeProperty:
     Validates: Requirements 7.4, 7.5
     """
 
-    # Increase deadline due to NameDetector initialization
-    @settings(max_examples=10, deadline=1000)
+    # Increase deadline due to NameDetector initialization (especially on CI runners)
+    @settings(max_examples=10, deadline=2000)
     @given(
         st.lists(
             st.dictionaries(
@@ -186,8 +186,8 @@ class TestCLISummaryDisplayProperty:
     Validates: Requirements 7.6
     """
 
-    # Increase deadline due to NameDetector initialization
-    @settings(max_examples=10, deadline=1000)
+    # Increase deadline due to NameDetector initialization (especially on CI runners)
+    @settings(max_examples=10, deadline=2000)
     @given(
         st.lists(
             st.dictionaries(

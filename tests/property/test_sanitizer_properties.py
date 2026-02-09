@@ -174,7 +174,7 @@ malformed_json_strings = st.one_of(
 class TestJSONRoundTripValidity:
     """Property-based tests for JSON round-trip validity."""
 
-    @settings(max_examples=25, deadline=1000)
+    @settings(max_examples=25, deadline=2000)
     @given(records=json_records())
     def test_json_round_trip_validity(self, records: list[dict]):
         """Feature: data-sanitizer, Property 1: JSON Round-Trip Validity
@@ -229,7 +229,7 @@ class TestJSONRoundTripValidity:
 class TestStructurePreservation:
     """Property-based tests for structure and non-PII preservation."""
 
-    @settings(max_examples=15, deadline=1000)
+    @settings(max_examples=15, deadline=2000)
     @given(data=json_records_with_pii())
     def test_structure_and_non_pii_preservation(self, data: tuple):
         """Feature: data-sanitizer, Property 3: Structure and Non-PII Preservation
@@ -334,7 +334,7 @@ class TestInvalidJSONErrorHandling:
 class TestDetectorConfiguration:
     """Property-based tests for detector configuration."""
 
-    @settings(max_examples=25, deadline=1000)
+    @settings(max_examples=25, deadline=2000)
     @given(
         email=st.emails(),
         phone=st.sampled_from(
