@@ -136,27 +136,29 @@ class Replacer:
         """
         # Generate a base fake phone number
         fake_phone = self._faker.phone_number()
+        digits = re.sub(r"\D", "", fake_phone)
+
+        # Ensure we have enough digits
+        if len(digits) < 10:
+            # Generate more digits if needed
+            fake_phone = self._faker.phone_number()
+            digits = re.sub(r"\D", "", fake_phone)
 
         # Try to preserve the format of the original
-        # Extract format pattern from original
-        if "+" in original and "-" in original:
-            # Format: +1-234-567-8900
-            # Keep the format with + and dashes
-            return fake_phone
-        elif "(" in original and ")" in original:
+        if "(" in original and ")" in original:
             # Format: (234) 567-8900
-            # Generate in this format
-            digits = re.sub(r"\D", "", fake_phone)
             if len(digits) >= 10:
                 return f"({digits[0:3]}) {digits[3:6]}-{digits[6:10]}"
-        elif "-" in original:
+        elif "-" in original and "+" not in original:
             # Format: 234-567-8900
-            digits = re.sub(r"\D", "", fake_phone)
             if len(digits) >= 10:
                 return f"{digits[0:3]}-{digits[3:6]}-{digits[6:10]}"
+        elif "+" in original:
+            # Format: +1-234-567-8900 or similar international format
+            # Keep the original format from Faker
+            return fake_phone
         elif original.isdigit():
             # Format: 2345678900 (no separators)
-            digits = re.sub(r"\D", "", fake_phone)
             return digits[: len(original)]
 
         # Default: return as-is
