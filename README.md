@@ -2,6 +2,8 @@
 
 A command-line tool that automatically detects and replaces Personally Identifiable Information (PII) in JSON datasets with semantically valid fake data while maintaining referential integrity.
 
+Use the streamlit cloud demo at https://smart-data-sanitizer.streamlit.app/
+
 ## Overview
 
 The Smart Data Sanitizer helps developers sanitize production data for testing, development, or sharing purposes without compromising data utility or consistency. It detects common PII types (emails, phone numbers, names, credit card numbers) and replaces them with realistic fake data while ensuring that identical values are consistently replaced throughout the dataset.
@@ -278,32 +280,74 @@ Check write permissions for the output directory, or specify a different output 
 
 MIT
 
-## Note on Prioritization 
+## Заметка о приоритизации (Note on Prioritization)
 
+### От каких фичей отказались намеренно?
 
-## Future Enhancements
+Для соблюдения сроков разработки MVP были намеренно исключены следующие функции:
 
-The following features are planned for future versions:
+1. **LLM-интеграция для контекстного определения PII и генерации текста необходимой тональности**
+   - Причина: Требует API-ключей, увеличивает сложность и стоимость использования
+   - Решение: Использование Presidio (NLP-библиотека) для базового определения
 
-- **LLM-based Detection**: Integrate large language models for context-aware PII detection that can identify sensitive information based on semantic understanding
-- **Streaming Support**: Process large files without loading entirely into memory, enabling sanitization of multi-gigabyte datasets
-- **CSV Support**: Add CSV input/output format support for broader data format compatibility
-- **Custom PII Types**: Allow users to define custom PII patterns and detection rules specific to their domain
-- **Performance Optimization**: Implement parallel processing for large datasets to improve throughput
-- **Multiple Anonymization Strategies**: Support different approaches beyond replacement (masking, hashing, tokenization, etc.)
-- **Configuration Files**: Support YAML/TOML configuration files for detector settings and customization
-- **Multilingual Support**: Detect PII in non-English text and international formats
+2. **Потоковая обработка больших файлов**
+   - Причина: Значительно усложняет архитектуру, требует управления памятью
+   - Решение: Введение ограничения на размер файлов до 1GB (загрузка в память)
 
-## Limitations (MVP Scope)
+3. **Поддержка CSV, XML и других форматов**
+   - Причина: Каждый формат требует отдельной логики парсинга и валидации
+   - Решение: Использование формата JSON как наиболее распространенного формата для API
 
-This MVP version has the following limitations:
+4. **Пользовательские правила определения PII**
+   - Причина: Требует UI для конфигурации, валидации regex, документации
+   - Решение: Предоставление фиксированного набора детекторов на первом этапе (электронная почта, номер телефона, ФИО, данные кредитной карты)
 
-- **In-Memory Processing**: Entire dataset must fit in memory; not suitable for extremely large files (>1GB)
-- **JSON Only**: Currently supports only JSON format; CSV, XML, and other formats not supported
-- **English-Centric**: Detection optimized for English text and US/international formats
-- **Limited PII Types**: Detects only emails, phone numbers, names, and credit card numbers; other PII types (SSN, passport numbers, etc.) not included
-- **No Streaming**: Files are processed in full before writing output
-- **Basic Name Detection**: May miss names in certain contexts or with unusual formatting
-- **No Custom Rules**: Users cannot define custom PII patterns without modifying code
+### Какие «углы срезали» в архитектуре?
 
-These limitations are intentional for the MVP and will be addressed in future releases based on user feedback and requirements.
+1. **Упрощенная система детекторов**
+  В инструменте используется упрощенная система детекторов пользовательских данных, которая не распознает 100% PII.
+
+2. **Базовая консистентность замен**
+    Кеш замен хранится только в памяти, поэтому разные итерации с одними исходными данными генерируют разные замены. В будущем возможно добавить сохранение mapping словаря в файл как опцию инструмента
+
+3. **Отсутствие валидации выходных данных**
+    В результирующих данных замененный email может не соответствовать домену компании. Лечится валидаторами и введением правил для генерации данных
+
+4. **Отсутствие метрик и логирования**
+    В процессе выполнения логируются только критические события, поэтому сложно производить отладку. В будущем необходимо ввести структурированное логирование и мониторинг метрик производительности.
+  
+5. **Поддержка только английского языка PII**
+    Для упрощения детекции существующими бибилотеками, инструмент корректно работает с PII на английском языке.
+
+### Как бы развивали инструмент дальше?
+  В целом улучшения инструмента можно разделить на несколько групп по актуальности и срочности реализации.
+
+#### Срочные и актуальные
+
+1. **Streaming для больших файлов**
+   Поддержать обработку файлов по частям и поддержку больших файлов. Ввести прогресс-бар для длительных операций
+
+2. **Поддержка CSV формата**
+   Поддержать исходные данные в CSV формате с сохранением структуры, автоопределнием разделителей и кодировки и обработкой заголовков.
+
+3. **Поддержка других языков**
+   Подержать работу с PII представленной на разных языках.
+
+#### Улучшения средней срочности
+
+1. **LLM-интеграция (опциональная)**
+   Интегрировать LLM для определения PII и для замены семантической текстовой информации
+
+2. **Расширенные типы PII**
+   Поддержать более широкий пул типов персональной информации (номер паспорта, страховки, IP-адрес, Биометрические данные, данные местоположения)
+
+3. **Web API и Docker**
+   Собрать DOCKER-образ для развертывания
+
+#### Долгосрочные улучшения (6-12 месяцев):
+
+1. **Производительность**
+   Увеличение производительности за счет параллельной обработки, кеширования и оптимизации.
+
+2. **Расширенная экосистема**
+   Интеграция с популярными типами БД, библиотека для Python
