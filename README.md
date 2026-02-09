@@ -1,19 +1,19 @@
 # Smart Data Sanitizer MVP
 
-A command-line tool that automatically detects and replaces Personally Identifiable Information (PII) in JSON datasets with semantically valid fake data while maintaining referential integrity.
+Tool that automatically detects and replaces Personally Identifiable Information (PII) in JSON datasets with semantically valid fake data while maintaining referential integrity.
 
 Use the streamlit cloud demo at https://smart-data-sanitizer.streamlit.app/
 
 ## Overview
 
-The Smart Data Sanitizer helps developers sanitize production data for testing, development, or sharing purposes without compromising data utility or consistency. It detects common PII types (emails, phone numbers, names, credit card numbers) and replaces them with realistic fake data while ensuring that identical values are consistently replaced throughout the dataset.
+The Smart Data Sanitizer helps sanitize production data for testing, development, or sharing purposes without compromising data utility or consistency. It detects common PII types (emails, phone numbers, names, credit card numbers) and replaces them with realistic fake data while ensuring that identical values are consistently replaced throughout the dataset.
 
 ### Goals
 
 - **Privacy Protection**: Remove sensitive personal information from datasets to comply with privacy regulations
 - **Data Utility**: Maintain data structure, relationships, and format so sanitized data remains useful for testing
 - **Consistency**: Ensure referential integrity by mapping identical inputs to identical outputs
-- **Simplicity**: Provide a straightforward CLI tool that requires no configuration or API keys
+- **Simplicity**: Provide a straightforward tool that requires no configuration or API keys
 - **Extensibility**: Support future enhancements like LLM-based detection without architectural changes
 
 
@@ -75,25 +75,6 @@ The application will open in your default web browser at `http://localhost:8501`
 - Streamlit is included in the project dependencies and installed automatically with `uv pip install -e ".[dev]"`
 - A modern web browser (Chrome, Firefox, Safari, Edge)
 - The web interface uses the same sanitization logic as the CLI, ensuring consistent results
-
-**Benefits of the Web Interface:**
-- No command-line knowledge required
-- Visual feedback and progress indicators
-- Easy file upload and download
-- Clear error messages and validation
-- Perfect for one-off sanitization tasks
-
-**Deploying to Streamlit Cloud:**
-
-To deploy this application to Streamlit Cloud:
-
-1. Push your code to a GitHub repository
-2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
-3. Click "New app" and select your repository
-4. Set the main file path to: `src/data_sanitizer/streamlit_app.py`
-5. Click "Deploy"
-
-**Important:** The project includes a `runtime.txt` file that pins Python to version 3.11, which is required for compatibility with the `presidio` library dependencies. Streamlit Cloud will automatically use this Python version.
 
 ### Command Format
 
