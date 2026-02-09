@@ -193,47 +193,6 @@ Summary:
 
 Sanitized data written to: clean_data.json
 ```
-
-
-**Key Features Demonstrated**:
-- **Referential Integrity**: "Jane Smith" and "jane.smith@company.com" are consistently replaced throughout
-- **Cross-Field Consistency**: First name "Jane" and last name "Smith" map to the same fake person ("Sarah Martinez")
-- **Nested Structure Preservation**: JSON structure remains intact
-- **Format Preservation**: Phone format "(555) 987-6543" is maintained
-- **Non-PII Preservation**: user_id remains unchanged
-
-## Architecture
-
-The sanitizer follows a modular, plugin-based architecture:
-
-- **CLI Module**: Command-line interface and user interaction
-- **Sanitizer Orchestrator**: Coordinates detection and replacement
-- **Detector Plugins**: Modular PII detection strategies (email, phone, name, credit card)
-- **Replacer**: Generates consistent fake data using Faker library
-- **Consistency Cache**: Maintains mapping between original and fake values
-
-## Development
-
-### Code Quality
-
-**Linting:**
-```cmd
-# Windows
-.venv\Scripts\python.exe -m ruff check src/ tests/
-
-# Unix/macOS
-.venv/bin/python -m ruff check src/ tests/
-```
-
-**Formatting:**
-```cmd
-# Windows
-.venv\Scripts\python.exe -m ruff format src/ tests/
-
-# Unix/macOS
-.venv/bin/python -m ruff format src/ tests/
-```
-
 ## Testing
 
 The project includes comprehensive testing with a dual approach:
@@ -287,15 +246,6 @@ The project includes test fixtures in `tests/fixtures/`:
 
 You can use these files to manually test the sanitizer or as examples for creating your own test data.
 
-## Requirements
-
-- Python 3.11+
-- Operating System: Windows, macOS, or Linux
-- Dependencies: faker, presidio-analyzer, presidio-anonymizer
-- Dev dependencies: pytest, pytest-cov, hypothesis, ruff
-
-**Note:** The tool works completely offline and does not require any API keys or external services.
-
 ## Troubleshooting
 
 ### Common Issues
@@ -323,15 +273,6 @@ Install dependencies: `uv pip install -e ".[dev]"`
 **Permission denied when writing output**
 
 Check write permissions for the output directory, or specify a different output path.
-
-### Getting Help
-
-If you encounter other issues:
-
-1. Verify dependencies are installed: `uv pip install -e ".[dev]"`
-2. Check Python version: `.venv\Scripts\python.exe --version` (should be 3.11+)
-3. Run the test suite: `.venv\Scripts\python.exe -m pytest`
-4. Review error messages carefully for specific details
 
 ## License
 
