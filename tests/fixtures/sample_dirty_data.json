@@ -1,0 +1,168 @@
+[
+  {
+    "user_id": 1,
+    "full_name": "John Doe",
+    "contact_email": "john.doe@example.com",
+    "mobile": "+1-555-123-4567",
+    "status": "active",
+    "created_at": "2023-01-15",
+    "payment_info": {
+      "card": "4532015112830366",
+      "billing_name": "John Doe",
+      "card_type": "visa"
+    },
+    "metadata": {
+      "source": "web",
+      "campaign": "summer2023",
+      "referrer": "https://example.com"
+    }
+  },
+  {
+    "user_id": 2,
+    "first": "jane",
+    "last": "smith",
+    "department": "Sales",
+    "level": 3,
+    "info": "Contact: jane.smith@example.com or call (555) 987-6543",
+    "notes": "jane smith joined in 2022. Reports to Bob Wilson.",
+    "performance_score": 8.5
+  },
+  {
+    "user_id": 3,
+    "payload": {
+      "customer": "Alice Johnson",
+      "email": "alice@test.com",
+      "cc": "378282246310005",
+      "address": "456 Oak Ave",
+      "city": "Boston",
+      "zip": "02101"
+    },
+    "order_history": [
+      {"order_id": 101, "amount": 250.00, "date": "2023-05-10"},
+      {"order_id": 102, "amount": 180.50, "date": "2023-06-22"}
+    ],
+    "tags": ["vip", "frequent_buyer"],
+    "description": "Long-time customer Alice Johnson (alice@test.com). Prefers email contact."
+  },
+  {
+    "user_id": 4,
+    "account": {
+      "username": "tech_admin",
+      "role": "administrator",
+      "permissions": ["read", "write", "admin"],
+      "mfa_enabled": true
+    },
+    "profile": {
+      "display_name": "TechAdmin",
+      "avatar_url": "https://cdn.example.com/avatars/123.png",
+      "bio": "System administrator since 2020"
+    },
+    "activity": {
+      "last_login": "2024-01-20T14:30:00Z",
+      "login_count": 342,
+      "last_ip": "192.168.1.100"
+    }
+  },
+  {
+    "user_id": 5,
+    "name": "ROBERT BROWN",
+    "email_address": "robert.brown@company.org",
+    "phone_number": "5551234567",
+    "employee_id": "EMP-2024-001",
+    "hire_date": "2024-01-10",
+    "salary": 85000,
+    "is_manager": false
+  },
+  {
+    "user_id": 6,
+    "first_name": "Sarah",
+    "last_name": "Martinez",
+    "work_email": "sarah.martinez@corp.com",
+    "personal_phone": "(555) 234-5678",
+    "emergency_contact": {
+      "name": "Michael Martinez",
+      "relationship": "spouse",
+      "phone": "+1-555-234-5679"
+    },
+    "benefits": {
+      "health_insurance": true,
+      "dental": true,
+      "vision": false
+    }
+  },
+  {
+    "user_id": 7,
+    "customer_name": "David Lee",
+    "contact_info": {
+      "primary_email": "david.lee@email.com",
+      "secondary_email": "d.lee@personal.net",
+      "office_phone": "555-876-5432",
+      "mobile_phone": "+1 555 876 5433"
+    },
+    "payment_methods": [
+      {
+        "type": "credit_card",
+        "number": "5555555555554444",
+        "cardholder": "David Lee",
+        "expiry": "03/26"
+      },
+      {
+        "type": "credit_card",
+        "number": "4111111111111111",
+        "cardholder": "David Lee",
+        "expiry": "12/25"
+      }
+    ],
+    "preferences": {
+      "newsletter": true,
+      "sms_alerts": false
+    }
+  },
+  {
+    "user_id": 8,
+    "profile": {
+      "username": "data_analyst_2024",
+      "display_name": "Analytics User",
+      "joined_date": "2024-02-01",
+      "total_posts": 42,
+      "reputation": 1250
+    },
+    "settings": {
+      "theme": "dark",
+      "language": "en-US",
+      "timezone": "America/New_York",
+      "notifications_enabled": true
+    }
+  },
+  {
+    "user_id": 9,
+    "applicant": "Jennifer Wilson",
+    "application_email": "jennifer.wilson+jobs@gmail.com",
+    "resume_phone": "(555) 345-6789",
+    "references": [
+      {
+        "name": "Thomas Anderson",
+        "title": "Senior Manager",
+        "email": "t.anderson@company.com",
+        "phone": "555-111-2222"
+      },
+      {
+        "name": "Emily Chen",
+        "title": "Director",
+        "email": "emily.chen@business.org",
+        "phone": "+1-555-333-4444"
+      }
+    ],
+    "cover_letter": "Dear Hiring Manager, I am Jennifer Wilson and I can be reached at jennifer.wilson+jobs@gmail.com or (555) 345-6789. I have extensive experience..."
+  },
+  {
+    "user_id": 10,
+    "transaction_id": "TXN-2024-00123",
+    "amount": 1250.75,
+    "currency": "USD",
+    "timestamp": "2024-02-09T10:30:00Z",
+    "merchant": "Online Store Inc",
+    "category": "electronics",
+    "status": "completed"
+  }
+]

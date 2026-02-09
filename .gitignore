@@ -1,0 +1,101 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+*.cover
+*.py,cover
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ruff
+.ruff_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# UV
+uv.lock
+
+# Project specific
+*.json
+!tests/fixtures/*.json
+!pyproject.toml
+my_output.json
+sanitized_output.json
+output.json
+clean_data.json
+dirty_data.json
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+temp/
+tmp/
+
+# OS specific
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Documentation builds
+docs/_build/
+site/
+
+# Kiro specs (optional - remove if you want to include them)
+.kiro/
+
+# Test task files (optional - keep the English version)
+test_task_en.txt
+*.docx
+test-performance-analysis.md
+python_context.txt
+nonexistent_directory/

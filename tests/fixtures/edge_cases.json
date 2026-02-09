@@ -1,0 +1,128 @@
+[
+  {
+    "case": "empty_array_follows_this_record"
+  },
+  {
+    "user_id": 1,
+    "username": "simple_user",
+    "role": "viewer",
+    "created_at": "2024-01-01",
+    "is_active": true,
+    "login_count": 5,
+    "preferences": {
+      "theme": "light",
+      "language": "en"
+    }
+  },
+  {
+    "user_id": 2,
+    "deeply": {
+      "nested": {
+        "structure": {
+          "with": {
+            "pii": {
+              "email": "deep.nested@example.com",
+              "name": "Deep Nester",
+              "contact": {
+                "phone": "555-999-8888",
+                "backup": {
+                  "email": "backup@example.com",
+                  "phone": "+1-555-999-8889"
+                }
+              }
+            },
+            "metadata": {
+              "level": 5,
+              "type": "test"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "user_id": 3,
+    "mixed_pii_field": "Contact John Smith at john.smith@example.com or call (555) 111-2222. CC: 4532123456789010. Also reach out to jane.doe@test.com.",
+    "description": "Multiple PII types in one field",
+    "tags": ["test", "edge_case"]
+  },
+  {
+    "user_id": 4,
+    "name": "Duplicate User",
+    "email": "duplicate@example.com",
+    "phone": "555-777-6666",
+    "notes": "This is Duplicate User with email duplicate@example.com and phone 555-777-6666"
+  },
+  {
+    "user_id": 5,
+    "name": "Duplicate User",
+    "email": "duplicate@example.com",
+    "phone": "555-777-6666",
+    "department": "Engineering",
+    "notes": "Same PII as user 4: Duplicate User, duplicate@example.com, 555-777-6666"
+  },
+  {
+    "user_id": 6,
+    "array_with_pii": [
+      {
+        "contact": "alice@example.com",
+        "name": "Alice Array"
+      },
+      {
+        "contact": "bob@example.com",
+        "name": "Bob Array"
+      },
+      {
+        "contact": "charlie@example.com",
+        "name": "Charlie Array",
+        "phone": "(555) 222-3333"
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "user_id": 7,
+    "empty_nested": {
+      "level1": {
+        "level2": {
+          "level3": {}
+        }
+      }
+    },
+    "empty_array": [],
+    "null_value": null,
+    "empty_string": "",
+    "zero": 0,
+    "false_value": false
+  },
+  {
+    "user_id": 8,
+    "special_formats": {
+      "email_with_plus": "user+tag@example.com",
+      "email_with_dots": "first.middle.last@example.co.uk",
+      "international_phone": "+44-20-7946-0958",
+      "phone_no_separators": "5559876543",
+      "amex_card": "378282246310005",
+      "visa_with_spaces": "4532 1234 5678 9010"
+    }
+  },
+  {
+    "user_id": 9,
+    "case_variations": {
+      "lowercase_name": "john doe",
+      "uppercase_name": "JANE SMITH",
+      "titlecase_name": "Alice Johnson",
+      "mixedcase_name": "bOb WiLsOn"
+    }
+  },
+  {
+    "user_id": 10,
+    "unicode_and_special": {
+      "name_with_accent": "José García",
+      "name_with_apostrophe": "O'Brien",
+      "hyphenated_name": "Mary-Jane Watson",
+      "name_with_suffix": "John Doe Jr.",
+      "name_with_prefix": "Dr. Sarah Smith"
+    }
+  }
+]

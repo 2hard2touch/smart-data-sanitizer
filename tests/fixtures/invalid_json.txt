@@ -1,0 +1,121 @@
+INVALID JSON TEST CASES
+=======================
+
+This file contains various malformed JSON examples for error testing.
+Each example is separated by a line of dashes.
+
+---
+CASE 1: Missing closing bracket
+[
+  {"id": 1, "name": "John"}
+
+---
+CASE 2: Missing closing brace
+[
+  {"id": 1, "name": "John"
+]
+
+---
+CASE 3: Trailing comma
+[
+  {"id": 1, "name": "John"},
+  {"id": 2, "name": "Jane"},
+]
+
+---
+CASE 4: Missing quotes around key
+[
+  {id: 1, "name": "John"}
+]
+
+---
+CASE 5: Single quotes instead of double quotes
+[
+  {'id': 1, 'name': 'John'}
+]
+
+---
+CASE 6: Missing comma between objects
+[
+  {"id": 1, "name": "John"}
+  {"id": 2, "name": "Jane"}
+]
+
+---
+CASE 7: Missing colon
+[
+  {"id" 1, "name": "John"}
+]
+
+---
+CASE 8: Unclosed string
+[
+  {"id": 1, "name": "John}
+]
+
+---
+CASE 9: Invalid escape sequence
+[
+  {"id": 1, "path": "C:\invalid\path"}
+]
+
+---
+CASE 10: Not an array or object (plain text)
+This is just plain text, not JSON at all.
+
+---
+CASE 11: Empty file (this would be tested separately)
+
+
+---
+CASE 12: Extra closing bracket
+[
+  {"id": 1, "name": "John"}
+]]
+
+---
+CASE 13: Missing opening bracket
+  {"id": 1, "name": "John"}
+]
+
+---
+CASE 14: Duplicate keys
+[
+  {"id": 1, "name": "John", "name": "Jane"}
+]
+
+---
+CASE 15: Invalid number format
+[
+  {"id": 01, "value": 123.456.789}
+]
+
+---
+CASE 16: Unquoted string value
+[
+  {"id": 1, "name": John}
+]
+
+---
+CASE 17: Missing value
+[
+  {"id": 1, "name": }
+]
+
+---
+CASE 18: Extra comma at start
+[
+  ,{"id": 1, "name": "John"}
+]
+
+---
+CASE 19: Invalid boolean
+[
+  {"id": 1, "active": True}
+]
+
+---
+CASE 20: Invalid null
+[
+  {"id": 1, "value": NULL}
+]
